@@ -7,19 +7,19 @@ Generate a UUID for all requests to Django to be used in logging and error repor
 
 # Why? 
 
-Why would you want to use this silly little thing? Well in a containerized, orchestrated, microservice world with centralized logging it's often hard to figure out where things have gone wrong.  
+Why would you want to use this silly little thing? In a containerized, orchestrated, microservice world with centralized logging, it's often hard to figure out where things have gone wrong.  
 
-This little middleware adds a UUID to the normal Django request object which you can use to add to add to things like: 
+This middleware adds a UUID to the normal Django request object. You can do things with that UUID like: 
 
-- All of your log messages
-- Error reports to Sentry/Rollbar/etc
-- Pass along to other internal services
+- Add it to all of your log messages
+- Add it to your error reports to Sentry/Rollbar/etc.
+- Pass it along to other internal services
 
-Along with generating and attaching a UUID to each request, the middleware also automatically adds the UUID to the response headers as `X-Request-ID` so anyone consuming your responses, say as an API, can use that as a reference point for reporting errors back to you. 
+Along with generating and attaching a UUID to each request, the middleware also automatically adds the UUID to the response headers as `X-Request-ID` so anyone consuming your responses (such as an API) can use that as a reference point for reporting errors back to you. 
 
 # Installation
 
-Add `tracer` to `INSTALLED_APPS` in your settings. 
+After installing `django-tracer` via `pip` or `pipenv`, add `tracer` to `INSTALLED_APPS` in your settings. 
 
 Then add `tracer.middleware.RequestID` to the top of your `MIDDLEWARE` settings. 
 
@@ -40,7 +40,7 @@ def some_view(request):
 
 ## Other ways to use this Request ID
 
-There are several other places you may consider wanting to use the ID to improve traceability: 
+There are several other places you may consider using the ID to improve traceability: 
 
 - Pass it as an argument to any Celery tasks you generate so there is a clear path between the incoming request and the tasks that were generated from it
 - Pass it as a header or argument to other internal APIs or services 
@@ -48,11 +48,11 @@ There are several other places you may consider wanting to use the ID to improve
 
 # Thanks! 
 
-Special thanks to [Rolf Håvard Blindheim](https://github.com/rhblind) for graciously turning over the name `django-tracer` to us to be able to use it for this project. 
+Special thanks to [Rolf Håvard Blindheim](https://github.com/rhblind) for graciously turning over the name `django-tracer` to us so we could use it for this project. 
 
 ## Need help?
 
-[REVSYS](http://www.revsys.com?utm_medium=github&utm_source=jslog4kube) can help with your Python, Django, and infrastructure projects. If you have a question about this project, please open a GitHub issue. If you love us and want to keep track of our goings-on, here's where you can find us online:
+[REVSYS](http://www.revsys.com?utm_medium=github&utm_source=djangotracer) can help with your Python, Django, and infrastructure projects. If you have a question about this project, please open a GitHub issue. If you love us and want to keep track of our goings-on, here's where you can find us online:
 
 <a href="https://revsys.com?utm_medium=github&utm_source=django-tracer"><img src="https://pbs.twimg.com/profile_images/915928618840285185/sUdRGIn1_400x400.jpg" height="50" /></a>
 <a href="https://twitter.com/revsys"><img src="https://cdn1.iconfinder.com/data/icons/new_twitter_icon/256/bird_twitter_new_simple.png" height="43" /></a>
